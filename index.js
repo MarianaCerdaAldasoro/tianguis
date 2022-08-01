@@ -1,87 +1,98 @@
-function Item (type, size, price, material, description, condition) {
+function Item (id, type, size, price, material, description, condition) {
+  this.id = id;
   this.type = type;
   this.size 	 = size;
   this.price  = price;
   this.material = material;
   this.description 	 = description;
   this.condition  = condition;
+}
 
-  this.isString = function (promptInput) {
-    return isNaN(Number(promptInput));
+let id = 0;
+
+let itemArray = [];
+
+
+function defineProperty (firstPrompt, wrongInputPrompt, whileCondition)  {
+  let property= prompt (firstPrompt);
+
+  while (whileCondition(property)) {
+    property = prompt (wrongInputPrompt);
   }
+
+  return property
 }
 
-
-let newItem = new Item ;
-
-let type = prompt ('Agregar tipo de prenda para ninio');
-
-while (!newItem.isString(type)) {
-  type = prompt('Este nos es un tipo de prenda, ingresar un tipo de prenda correcto')
+function isString(promptInput) {
+  return isNaN(Number(promptInput));
 }
 
-newItem.type = type
+function createItem () {
+  id++;
 
-let size = prompt ('Agregar talla de la prenda en valor numerico');
+  let type = defineProperty(
+    'Agregar tipo de prenda para ninio',
+    'Este nos es un tipo de prenda, ingresar un tipo de prenda correcto',
+    function (property) {
+      return !isString(property)
+    }
+  )
 
+  let size = defineProperty(
+    'Agregar talla de la prenda en valor numerico',
+    'Este no es una talla valida, favor de agregarlo en valor numerico, entre el 2 y 16',
+    function (property) {
+      return isString(property) || (Number(property) % 2 != 0 || Number(property) > 16)
+    }
+  )
 
-while (newItem.isString(size) || (Number(size) % 2 != 0 || Number(size) > 16)) {
-  size = prompt('Este no es una talla valida, favor de agregarlo en valor numerico, entre el 2 y 16')
+  let price = defineProperty(
+    'Agregar el precio en que se publicara tu producto',
+    'Este no es un precio adecuado, favor de agregar un precio correcto',
+    function (property) {
+      return isString(property) || (Number(property) <= 0)
+    }
+  )
 
+  let material = defineProperty(
+    'Agregar el material de la prenda',
+    'Este no es un material adecuado, favor de agregar un material correcto',
+    function (property) {
+      return !isString(property)
+    }
+  )
+
+  let description = defineProperty(
+    'Agregar la descripcion de la prenda, lo mas detallado posible',
+    'Esta no es una descripcion adecuada, favor de agregar una descripcion correcta',
+    function (property) {
+      return !isString(property)
+    }
+  )
+
+  let validConditions = {
+    usado: true,
+    seminuevo: true,
+    nuevo: true,
+  }
+
+  let condition = defineProperty(
+    'Agregar la condicion de la prenda, definirla como: usado, seminuevo o nuevo',
+    'Este no es un condition adecuada, favor de agregar una condicion correcta, ya sea usado, seminuevo o nuevo',
+    function (property) {
+      return !isString(property) || !validConditions[property]
+    }
+  )
+
+  let item = new Item(id, type, size, price, material, description, condition);
+
+  return item;
 }
 
-newItem.size = size
-
-let price = prompt ('Agregar el precio en que se publicara tu producto');
-
-
-while (newItem.isString(price) || Number(price) <= 0) {
-  price = prompt('Este no es un precio adecuado, favor de agregar un precio correcto')
-
+let addItems = prompt ('Quieres agregar un articulo? s/n')
+while (addItems == 's') {
+  itemArray.push(createItem())
+  addItems= prompt ('Quieres agregar otro articulo? s/n')
 }
 
-newItem.price = price
-
-let material = prompt ('Agregar el material de la prenda');
-
-
-while (!newItem.isString(material )) {
-  material = prompt('Este no es un material adecuado, favor de agregar un material correcto')
-
-}
-
-newItem.material = material
-
-let description = prompt ('Agregar la descripcion de la prenda, lo mas detallado posible');
-
-
-while (!newItem.isString(description )) {
-  description = prompt('Esta no es una descripcion adecuada, favor de agregar una descripcion correcta')
-
-}
-
-newItem.description = description
-
-let condition = prompt ('Agregar la condicion de la prenda (usado, seminuevo o nuevo');
-
-let validConditions = {
-  usado: true,
-  seminuevo: true,
-  nuevo: true,
-}
-
-while (!newItem.isString(condition ) || !validConditions[condition]) {
-  condition = prompt('Este no es un condition adecuada, favor de agregar una condicion correcta, ya sea usado, seminuevo o nuevo')
-
-}
-
-newItem.condition = condition
-
-alert(`Producto agregado con exito:
-\n type: ${newItem.type}
-\n size: ${newItem.size}
-\n price: ${newItem.price}
-\n material: ${newItem.material}
-\n description: ${newItem.description}
-\n condition: ${newItem.condition}
-`)
+console.log(itemArray)
