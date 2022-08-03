@@ -8,10 +8,30 @@ function Item (id, type, size, price, material, description, condition) {
   this.condition  = condition;
 }
 
+let validConditions = {
+  usado: true,
+  seminuevo: true,
+  nuevo: true,
+}
+
 let id = 0;
 
 let itemArray = [];
 
+itemArray.push(new Item(234567, 'blusa', 4, 50, 'algodon', 'blusa morada con tema de unicornio', 'seminuevo'));
+itemArray.push(new Item(234568, 'blusa', 6, 75, 'poliester', 'blusa azul con tema de estrellas', 'nuevo'));
+itemArray.push(new Item(234569, 'playera', 8, 50, 'algodon', 'playera amarilla con tema de minecraft', 'usado'));
+itemArray.push(new Item(234560, 'camisa', 2, 80, 'algodon y poliester', 'camisa roja de ninio con cuadros y manga larga','nuevo'));
+itemArray.push(new Item(234570, 'pantalon', 8, 100, 'mezclilla', 'pantalon de mezclilla azul para ninia', 'seminuevo'));
+
+function filterCondition (condition, itemArray) {
+  let con= condition
+  while (!validConditions[con]) {
+    con= prompt ('Este no es un condition adecuada, favor de agregar una condicion correcta, ya sea usado, seminuevo o nuevo');
+  }
+  let filterArray = itemArray.filter (item => con == item.condition)
+  return filterArray
+}
 
 function defineProperty (firstPrompt, wrongInputPrompt, whileCondition)  {
   let property= prompt (firstPrompt);
@@ -70,11 +90,6 @@ function createItem () {
     }
   )
 
-  let validConditions = {
-    usado: true,
-    seminuevo: true,
-    nuevo: true,
-  }
 
   let condition = defineProperty(
     'Agregar la condicion de la prenda, definirla como: usado, seminuevo o nuevo',
@@ -89,10 +104,19 @@ function createItem () {
   return item;
 }
 
-let addItems = prompt ('Quieres agregar un articulo? s/n')
-while (addItems == 's') {
+let addItems = prompt ('Quieres agregar un articulo? si/no')
+while (addItems == 'si') {
   itemArray.push(createItem())
-  addItems= prompt ('Quieres agregar otro articulo? s/n')
+  addItems= prompt ('Quieres agregar otro articulo? si/no')
 }
 
-console.log(itemArray)
+console.log('Lista de items disponibles', itemArray)
+
+let busqueda = prompt ('Quieres hacer una busqueda segun la condicion de las prendas, entre aquellas disponibles? si/no')
+while (busqueda == 'si') {
+  let condicionPrenda = prompt ('Escoge una de estas condiciones: nuevo, seminuevo o usado')
+  let arrayFiltrada = filterCondition(condicionPrenda, itemArray)
+  busqueda = 'no'
+
+console.log('Filtrado por '+ condicionPrenda, arrayFiltrada)
+}
