@@ -18,11 +18,32 @@ let id = 0;
 
 let itemArray = [];
 
-itemArray.push(new Item(234567, 'blusa', 4, 50, 'algodon', 'blusa morada con tema de unicornio', 'seminuevo'));
-itemArray.push(new Item(234568, 'blusa', 6, 75, 'poliester', 'blusa azul con tema de estrellas', 'nuevo'));
-itemArray.push(new Item(234569, 'playera', 8, 50, 'algodon', 'playera amarilla con tema de minecraft', 'usado'));
-itemArray.push(new Item(234560, 'camisa', 2, 80, 'algodon y poliester', 'camisa roja de ninio con cuadros y manga larga','nuevo'));
-itemArray.push(new Item(234570, 'pantalon', 8, 100, 'mezclilla', 'pantalon de mezclilla azul para ninia', 'seminuevo'));
+let container = document.querySelector ('.container');
+
+itemArray.push(new Item(234567, 'Blusa', 4, 50, 'Algodon', 'Blusa morada con tema de unicornio', 'Seminuevo'));
+itemArray.push(new Item(234568, 'Blusa', 6, 75, 'Poliester', 'Blusa azul con tema de estrellas', 'Nuevo'));
+itemArray.push(new Item(234569, 'Playera', 8, 50, 'Algodon', 'Playera amarilla con tema de minecraft', 'Usado'));
+itemArray.push(new Item(234560, 'Camisa', 2, 80, 'Algodon y poliester', 'Camisa roja de ninio con cuadros y manga larga','Nuevo'));
+itemArray.push(new Item(234570, 'Pantalon', 8, 100, 'Mezclilla', 'Pantalon de mezclilla azul para ninia', 'Seminuevo'));
+
+for (let item of itemArray){
+  console.log (item)
+  container.innerHTML += `
+  <div class="card" style="width: 18rem;">
+  <img src="https://picsum.photos/200/200" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${item.type}</h5>
+    <p class="card-text">${item.description}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Talla: ${item.size}</li>
+    <li class="list-group-item">Material: ${item.material}</li>
+    <li class="list-group-item">Precio: $${item.price}</li>
+  </ul>
+</div>
+  `
+};
+  
 
 function filterCondition (condition, itemArray) {
   let con= condition
@@ -34,7 +55,7 @@ function filterCondition (condition, itemArray) {
 }
 
 function defineProperty (firstPrompt, wrongInputPrompt, whileCondition)  {
-  let property= prompt (firstPrompt);
+  let property = prompt (firstPrompt);
 
   while (whileCondition(property)) {
     property = prompt (wrongInputPrompt);
@@ -104,19 +125,23 @@ function createItem () {
   return item;
 }
 
-let addItems = prompt ('Quieres agregar un articulo? si/no')
-while (addItems == 'si') {
-  itemArray.push(createItem())
-  addItems= prompt ('Quieres agregar otro articulo? si/no')
-}
+setTimeout(() => {
+  let addItems = prompt ('Quieres agregar un articulo? si/no')
+  while (addItems == 'si') {
+    itemArray.push(createItem())
+    addItems= prompt ('Quieres agregar otro articulo? si/no')
+  }
 
-console.log('Lista de items disponibles', itemArray)
+  console.log('Lista de items disponibles', itemArray)
 
-let busqueda = prompt ('Quieres hacer una busqueda segun la condicion de las prendas, entre aquellas disponibles? si/no')
-while (busqueda == 'si') {
-  let condicionPrenda = prompt ('Escoge una de estas condiciones: nuevo, seminuevo o usado')
-  let arrayFiltrada = filterCondition(condicionPrenda, itemArray)
-  busqueda = 'no'
+  let busqueda = prompt ('Quieres hacer una busqueda segun la condicion de las prendas, entre aquellas disponibles? si/no')
+  while (busqueda == 'si') {
+    let condicionPrenda = prompt ('Escoge una de estas condiciones: nuevo, seminuevo o usado')
+    let arrayFiltrada = filterCondition(condicionPrenda, itemArray)
+    busqueda = 'no'
 
-console.log('Filtrado por '+ condicionPrenda, arrayFiltrada)
-}
+  console.log('Filtrado por '+ condicionPrenda, arrayFiltrada)
+  }
+}, 1000);
+
+

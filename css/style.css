@@ -1,5 +1,16 @@
 body {
   font-family: 'Roboto', sans-serif;
-  background-image: url("../recursos/el\ tiaanguyis.jpg");
+  background-image: url("../recursos/dynamic-liquid-wave-colorful-background-vector.jpg");
   background-repeat:no-repeat;
+  background-size: cover;
+}
+
+.container {
+  display:flex;
+  justify-content: space-around;
+  width: 90%;
+}
+
+.card {
+  margin: 1rem;
 }
