@@ -20,31 +20,6 @@ let itemArray = [];
 
 let container = document.querySelector ('.container');
 
-itemArray.push(new Item(234567, 'Blusa', 4, 50, 'Algodon', 'Blusa morada con tema de unicornio', 'Seminuevo'));
-itemArray.push(new Item(234568, 'Blusa', 6, 75, 'Poliester', 'Blusa azul con tema de estrellas', 'Nuevo'));
-itemArray.push(new Item(234569, 'Playera', 8, 50, 'Algodon', 'Playera amarilla con tema de minecraft', 'Usado'));
-itemArray.push(new Item(234560, 'Camisa', 2, 80, 'Algodon y poliester', 'Camisa roja de ninio con cuadros y manga larga','Nuevo'));
-itemArray.push(new Item(234570, 'Pantalon', 8, 100, 'Mezclilla', 'Pantalon de mezclilla azul para ninia', 'Seminuevo'));
-
-for (let item of itemArray){
-  console.log (item)
-  container.innerHTML += `
-  <div class="card" style="width: 18rem;">
-  <img src="https://picsum.photos/200/200" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">${item.type}</h5>
-    <p class="card-text">${item.description}</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Talla: ${item.size}</li>
-    <li class="list-group-item">Material: ${item.material}</li>
-    <li class="list-group-item">Precio: $${item.price}</li>
-  </ul>
-</div>
-  `
-};
-  
-
 function filterCondition (condition, itemArray) {
   let con= condition
   while (!validConditions[con]) {
@@ -125,23 +100,80 @@ function createItem () {
   return item;
 }
 
-setTimeout(() => {
-  let addItems = prompt ('Quieres agregar un articulo? si/no')
-  while (addItems == 'si') {
-    itemArray.push(createItem())
-    addItems= prompt ('Quieres agregar otro articulo? si/no')
-  }
+let button = document.querySelector('button');
 
-  console.log('Lista de items disponibles', itemArray)
+let type = document.querySelector('#type');
 
-  let busqueda = prompt ('Quieres hacer una busqueda segun la condicion de las prendas, entre aquellas disponibles? si/no')
-  while (busqueda == 'si') {
-    let condicionPrenda = prompt ('Escoge una de estas condiciones: nuevo, seminuevo o usado')
-    let arrayFiltrada = filterCondition(condicionPrenda, itemArray)
-    busqueda = 'no'
+console.log (type)
 
-  console.log('Filtrado por '+ condicionPrenda, arrayFiltrada)
-  }
-}, 1000);
+let size = document.querySelector('#size');
+
+let price = document.querySelector('#price');
+
+let material = document.querySelector('#material');
+
+let description = document.querySelector('#description');
+
+let condition = document.querySelector('#condition');
+
+function fnClick(event) {
+
+let newitem = new Item()
+
+newitem.type = type.value
+newitem.size = size.value
+newitem.price = price.value
+newitem.material = material.value
+newitem.description = description.value
+newitem.condition = condition.value
+console.log (newitem)
+
+itemArray.push(newitem);
+
+
+  console.log (newitem)
+  container.innerHTML += `
+  <div class="card" style="width: 18rem;">
+  <img src="https://picsum.photos/200/200" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${newitem.type}</h5>
+    <p class="card-text">${newitem.description}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Talla: ${newitem.size}</li>
+    <li class="list-group-item">Material: ${newitem.material}</li>
+    <li class="list-group-item">Precio: $${newitem.price}</li>
+  </ul>
+</div>
+  `
+;
+
+
+}
+
+
+
+button.addEventListener("click", fnClick);
+
+
+
+// setTimeout(() => {
+//   let addItems = prompt ('Quieres agregar un articulo? si/no')
+//   while (addItems == 'si') {
+//     itemArray.push(createItem())
+//     addItems= prompt ('Quieres agregar otro articulo? si/no')
+//   }
+
+//   console.log('Lista de items disponibles', itemArray)
+
+//   let busqueda = prompt ('Quieres hacer una busqueda segun la condicion de las prendas, entre aquellas disponibles? si/no')
+//   while (busqueda == 'si') {
+//     let condicionPrenda = prompt ('Escoge una de estas condiciones: nuevo, seminuevo o usado')
+//     let arrayFiltrada = filterCondition(condicionPrenda, itemArray)
+//     busqueda = 'no'
+
+//   console.log('Filtrado por '+ condicionPrenda, arrayFiltrada)
+//   }
+// }, 1000);
 
 

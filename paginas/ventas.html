@@ -21,8 +21,43 @@
     </nav>
   </header>
   <main>
-    <div class="container">
+    <div class="content">
+      <div class="form">
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">Agrega el tipo de prenda para ninios que quieres vender</label>
+          <input type="text" class="form-control" id="type" placeholder="Ejemplo: Blusa, Short, Pantalon, Falda">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Agrega la talla de la prenda</label>
+          <input type="text" class="form-control" id="size" placeholder="Escribir la talla en valor numerico entre el 2 y el 16 ">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Agrega un precio de venta para la prenda</label>
+          <input type="text" class="form-control" id="price" placeholder="Escoge un precio adecuado a las caracteristiocas de la prenda">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Agrega el material de la prenda</label>
+          <input type="text" class="form-control" id="material" placeholder="Ejemplo: 50% algodon y 50% poliester">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Agrega una descripcion de la prenda, lo mas especifico posible</label>
+          <input type="text" class="form-control" id="description" placeholder="Describe la prenda, el color, tema , genero y caracteristicas particulares">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Elige la condición de la prenda</label>
+          <select id="condition" aria-label="Nuevo, Seminuevo y Usado">
+            <option value="Nuevo">Nuevo</option>
+            <option value="Seminuevo">Seminuevo</option>
+            <option value="Usuario">Usado</option>
+          </select>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-primary me-md-2" type="button">Agregar la prenda a mi Show Room</button>
+        </div>
+      </div>
+      <div class="container">
 
+      </div>
     </div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
