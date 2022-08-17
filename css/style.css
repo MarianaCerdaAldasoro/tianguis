@@ -1,3 +1,37 @@
+header .navegacion {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: relative;
+  margin: 1.25rem;
+  width: 100%; }
+
+  header .navegacion__imagen-texto {
+    display: flex;
+    width: 100%; }
+
+  header .navegacion__logo {
+    width: 11.25rem; }
+
+  header .navegacion__lista {
+    margin: 1rem;
+    padding: .5rem;
+    background-color: rgb(229, 233, 32);
+    list-style-type:none;
+    display:inline-block;
+    text-decoration-color: azure;
+  }
+
+  header .navegacion__item {
+    margin: 10px;
+    padding: 5px;
+    transition: all 300ms ease;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
 body {
   font-family: 'Roboto', sans-serif;
   background-image: url("../recursos/dynamic-liquid-wave-colorful-background-vector.jpg");
@@ -5,8 +39,37 @@ body {
   background-size: cover;
 }
 
+h1 {
+  margin: .625rem;
+  height: 6.875rem;
+  color: antiquewhite;
+  font-size: 4.375rem;
+  font-style: oblique;
+  text-align: center;
+  text-shadow: .313rem .313rem black;
+  background-image: url(../recursos/h1.jpeg);
+  background-repeat: repeat;
+  width: 100%;
+  right: 0;
+  top: 1.875rem;
+  padding-top: 1.2rem; }
+
+  .div__image {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+  }
+
+  .body__image {
+    justify-content:center;
+    align-items: center;
+  }
+
 .content {
   display:flex;
+  justify-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .container {
@@ -17,12 +80,13 @@ body {
 }
 
 .form {
-  width: 40%;
   padding: 1rem;
   margin: 1rem;
   background: rgba(251, 255, 252, .8);
+  flex-wrap: wrap;
 }
 
 .card {
   margin: 1rem;
+  flex-wrap: wrap;
 }
