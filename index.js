@@ -1,12 +1,4 @@
-let validConditions = {
-  usado: true,
-  seminuevo: true,
-  nuevo: true,
-}
-
-let id = 0;
-
-let itemArray = [];
+import uuid from 'uuidjs';
 
 let container = document.querySelector ('.container');
 let button = document.querySelector('button');
@@ -27,19 +19,6 @@ function Item (id, type, size, price, material, description, condition) {
   this.condition  = condition;
 }
 
-function filterCondition (condition, itemArray) {
-  let con= condition
-  while (!validConditions[con]) {
-    con= prompt ('Este no es un condition adecuada, favor de agregar una condicion correcta, ya sea usado, seminuevo o nuevo');
-  }
-  let filterArray = itemArray.filter (item => con == item.condition)
-  return filterArray
-}
-
-function isString(promptInput) {
-  return isNaN(Number(promptInput));
-}
-
 function agregarHtml (item, container) {
   container.innerHTML += `
     <div class="card" style="width: 18rem;">
@@ -49,6 +28,7 @@ function agregarHtml (item, container) {
         <p class="card-text">${item.description}</p>
       </div>
       <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: ${item.id}</li>
         <li class="list-group-item">Talla: ${item.size}</li>
         <li class="list-group-item">Material: ${item.material}</li>
         <li class="list-group-item">Precio: $${item.price}</li>
@@ -59,21 +39,25 @@ function agregarHtml (item, container) {
 
 function fnClick(event) {
   event.preventDefault();
-  let newitem = new Item()
-  newitem.id = Math.floor(Math.random() * 99999999)
-  newitem.type = type.value
-  newitem.size = size.value
-  newitem.price = price.value
-  newitem.material = material.value
-  newitem.description = description.value
-  newitem.condition = condition.value
+  let newitem = new Item({
+    // Conditional Assignment
+    id: uuid.generate(),
+    type: type.value,
+    size: size.value,
+    price: price.value,
+    material: material.value,
+    description: description.value,
+    condition: condition.value,
+  })
+
 
   if (!localStorage.length) {
     localStorage.setItem('items', JSON.stringify([]))
   }
 
   let itemsArray = JSON.parse(localStorage.getItem('items'));
-  itemsArray.push(newitem);
+  // Spread operator
+  itemsArray = [...itemsArray, newitem]
 
   localStorage.setItem('items', JSON.stringify(itemsArray));
 
@@ -83,6 +67,7 @@ function fnClick(event) {
 
 
 function initialLoad() {
+  // Or operator
   let storageItems = JSON.parse(localStorage.getItem('items')) || [];
 
   for (let item of storageItems) {
@@ -92,26 +77,3 @@ function initialLoad() {
 
 initialLoad();
 button.addEventListener("click", fnClick);
-
-
-
-// setTimeout(() => {
-//   let addItems = prompt ('Quieres agregar un articulo? si/no')
-//   while (addItems == 'si') {
-//     itemArray.push(createItem())
-//     addItems= prompt ('Quieres agregar otro articulo? si/no')
-//   }
-
-//   console.log('Lista de items disponibles', itemArray)
-
-//   let busqueda = prompt ('Quieres hacer una busqueda segun la condicion de las prendas, entre aquellas disponibles? si/no')
-//   while (busqueda == 'si') {
-//     let condicionPrenda = prompt ('Escoge una de estas condiciones: nuevo, seminuevo o usado')
-//     let arrayFiltrada = filterCondition(condicionPrenda, itemArray)
-//     busqueda = 'no'
-
-//   console.log('Filtrado por '+ condicionPrenda, arrayFiltrada)
-//   }
-// }, 1000);
-
-
