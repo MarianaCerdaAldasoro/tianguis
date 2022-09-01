@@ -66,7 +66,7 @@ function fnClick(event) {
 }
 
 
-function initialLoad() {
+function initialLoad(url) {
   // Or operator
   let storageItems = JSON.parse(localStorage.getItem('items')) || [];
 
@@ -85,5 +85,5 @@ function initialLoad() {
 
 let url = '../articles.json';
 
-initialLoad();
+initialLoad(url);
 button.addEventListener("click", fnClick);
