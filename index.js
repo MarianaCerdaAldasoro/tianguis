@@ -1,13 +1,5 @@
-import uuid from 'uuidjs';
-
 let container = document.querySelector ('.container');
-let button = document.querySelector('button');
-let type = document.querySelector('#type');
-let size = document.querySelector('#size');
-let price = document.querySelector('#price');
-let material = document.querySelector('#material');
-let description = document.querySelector('#description');
-let condition = document.querySelector('#condition');
+  let button = document.querySelector('button');
 
 function Item (id, type, size, price, material, description, condition) {
   this.id = id;
@@ -39,17 +31,25 @@ function agregarHtml (item, container) {
 
 function fnClick(event) {
   event.preventDefault();
-  let newitem = new Item({
-    // Conditional Assignment
-    id: uuid.generate(),
+
+
+  let type = document.querySelector('#type');
+  console.log(document.querySelector('#type'))
+  let size = document.querySelector('#size');
+  let price = document.querySelector('#price');
+  let material = document.querySelector('#material');
+  let description = document.querySelector('#description');
+  let condition = document.querySelector('#condition');
+  let newitem = new Item();
+  newitem = {
+    id: Math.floor(Math.random() * 99999999),
     type: type.value,
     size: size.value,
     price: price.value,
     material: material.value,
     description: description.value,
-    condition: condition.value,
-  })
-
+    condition: condition.value
+  }
 
   if (!localStorage.length) {
     localStorage.setItem('items', JSON.stringify([]))
@@ -73,7 +73,17 @@ function initialLoad() {
   for (let item of storageItems) {
     agregarHtml(item, container);
   }
+
+  fetch(url)
+    .then(data => data.json())
+    .then(data => {
+      for (let item of data) {
+        agregarHtml(item, container);
+      }
+    });
 }
+
+let url = '../articles.json';
 
 initialLoad();
 button.addEventListener("click", fnClick);

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 28182918347,
+    "type": "Short",
+    "size": 12,
+    "price": 329,
+    "material": "Plastico",
+    "description": "short de plastico",
+    "condition": "Usado"
+  },
+  {
+    "id": 75612039825967,
+    "type": "Blusa",
+    "size": 8,
+    "price": 12000,
+    "material": "Seda",
+    "description": "Vestido para nina pequena",
+    "condition": "Nuevo"
+  },
+  {
+    "id": 45647897696789,
+    "type": "Armadura",
+    "size": 2,
+    "price": 5980,
+    "material": "Acero",
+    "description": "Armadura para bebe",
+    "condition": "Viejo"
+  }
+]
